@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import TodoList from './TodoList';
+import TodoForm from "./TodoForm";
 import Grid from "@material-ui/core/Grid";
 
 function TodoApp() {
@@ -13,6 +14,9 @@ function TodoApp() {
     { id: 3, task: "blö", completed: false }
   ];
   const [todos, setTodos] = useState(initialTodos);
+  const addTodo = newTodoText => {
+    setTodos([...todos, {id: 4, task: newTodoText, completed: false}])
+  }
   return (
     <Paper
       style={{ padding: 0, margin: 0, height: "100vh", background: "#fafafa" }}
@@ -23,6 +27,7 @@ function TodoApp() {
           <Typography color="inherit">todos with hooks</Typography>
         </ToolBar>
       </AppBar>
+      <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} />
     </Paper>
   );
