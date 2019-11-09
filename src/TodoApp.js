@@ -13,10 +13,24 @@ function TodoApp() {
     { id: 2, task: "bli", completed: true },
     { id: 3, task: "blö", completed: false }
   ];
+
   const [todos, setTodos] = useState(initialTodos);
+
   const addTodo = newTodoText => {
     setTodos([...todos, { id: 4, task: newTodoText, completed: false }]);
   };
+
+  const removeTodo = todoId => {
+    //filter out remove todo
+    const updatedTodos = todos.filter(todo => todo.id !== todoId);
+    // call set todos with new todos array
+    setTodos(updatedTodos);
+  };
+
+  const toggleTodo = todoId => {
+    const updatedTodos = todos.map(todo => todo.id === todoId ? {...todo, completed: !todo.completed} : todo);
+    setTodos(updatedTodos);
+  }
   return (
     <Paper
       style={{ padding: 0, margin: 0, height: "100vh", background: "#fafafa" }}
@@ -30,7 +44,7 @@ function TodoApp() {
       <Grid container justify="center" style={{ marginTop: "10px" }}>
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} />
+          <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
         </Grid>
       </Grid>
     </Paper>
