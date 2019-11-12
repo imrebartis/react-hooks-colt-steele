@@ -18,7 +18,7 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
               toggleTodo={toggleTodo}
               editTodo={editTodo}
             />
-            <Divider />
+            {index < todos.length - 1 && <Divider />}
           </Fragment>
         ))}
       </List>
